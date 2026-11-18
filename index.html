@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Birthday Delivery! 🏎️💙</title>
+
+  <!-- Cute Bubbly + Handwritten Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-outer: #08152b;
+      --card-bg: #f6faff;
+      --blue-main: #2563eb;
+      --blue-dark: #1e3a8a;
+      --blue-accent: #0284c7;
+      --blue-soft: #bfdbfe;
+      --text-main: #172554;
+      --text-soft: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background-color: var(--bg-outer);
+      background-image: radial-gradient(rgba(96, 165, 250, 0.35) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Main Luxury Showroom Card Container */
+    .stage {
+      position: relative;
+      width: 100%;
+      max-width: 780px;
+      min-height: 520px;
+      background: var(--card-bg);
+      border-radius: 30px;
+      border: 4px solid #60a5fa;
+      box-shadow: 0 22px 55px rgba(37, 99, 235, 0.35);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Luxury Ice-Blue Pinstripe Grid Pattern */
+    .gingham-bg {
+      background-color: #f4f9ff;
+      background-image:
+        linear-gradient(90deg, rgba(59, 130, 246, 0.12) 50%, transparent 50%),
+        linear-gradient(rgba(59, 130, 246, 0.12) 50%, transparent 50%);
+      background-size: 28px 28px;
+    }
+
+    /* Midnight Sapphire Theme Class (for Birthday Wish & Cake Page) */
+    .night-bg {
+      background: linear-gradient(135deg, #061229 0%, #0f2957 55%, #1d4ed8 100%);
+      color: #f0f9ff;
+      border-color: #93c5fd;
+    }
+
+    /* Section Hide / Unhide Logic with Pop-In Animation */
+    .page {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Allow Q3 runaway button to roam across the whole .stage card */
+    #sec-q3 {
+      position: static;
+    }
+
+    .page.active {
+      display: flex;
+      animation: popIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Floating Luxury Car & Blue Stickers */
+    .sticker {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+    .sticker.tl { top: 14px; left: 18px; font-size: 28px; }
+    .sticker.tr { top: 14px; right: 18px; font-size: 28px; animation-delay: 0.7s; }
+    .sticker.bl { bottom: 14px; left: 18px; font-size: 26px; animation-delay: 1.2s; }
+    .sticker.br { bottom: 14px; right: 18px; font-size: 26px; animation-delay: 0.4s; }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-7px) rotate(4deg); }
+    }
+
+    /* Typography */
+    h1 {
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.4px;
+    }
+
+    p.subtitle {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+      max-width: 480px;
+      line-height: 1.5;
+    }
+
+    .night-bg p.subtitle {
+      color: #dbeafe;
+    }
+
+    /* Mascot GIF Frame */
+    .gif-box {
+      width: 170px;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px auto 16px;
+      position: relative;
+    }
+
+    .gif-box img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 20px;
+      object-fit: contain;
+    }
+
+    /* Pill Buttons */
+    .btn-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .btn {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 999px;
+      border: 3px solid #fff;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, left 0.15s ease, top 0.15s ease;
+      box-shadow: 0 6px 0 rgba(15, 23, 42, 0.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 rgba(15, 23, 42, 0.18);
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: #fff;
+    }
+
+    .btn-no {
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      color: #fff;
+    }
+
+    .btn-back {
+      background: #e0f2fe;
+      color: #075985;
+      border-color: #7dd3fc;
+      font-size: 0.95rem;
+      padding: 10px 22px;
+      margin-top: 18px;
+    }
+
+    .btn-locked {
+      background: #e2e8f0;
+      color: #64748b;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .btn-locked:hover {
+      transform: none;
+    }
+
+    /* Music Button Top Corner */
+    .music-pill {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      z-index: 20;
+      background: #eff6ff;
+      border: 2px solid #93c5fd;
+      color: var(--blue-main);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    /* Luxury Garage Hub Cards (Kept in code & re-themed) */
+    .garage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 620px;
+      margin: 12px 0 20px;
+    }
+
+    @media (max-width: 600px) {
+      .garage-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+      }
+    }
+
+    .car-card {
+      background: #fff;
+      border: 3px solid #bfdbfe;
+      border-radius: 22px;
+      padding: 18px 12px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      position: relative;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+    }
+
+    .car-card:hover {
+      transform: translateY(-6px) rotate(-1.5deg);
+      border-color: var(--blue-main);
+    }
+
+    .car-card .car-icon {
+      font-size: 3.1rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .car-card h3 {
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .car-card .badge {
+      display: none;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .car-card.visited .badge {
+      display: inline-block;
+    }
+
+    /* Polaroid + Compliment Bubbles */
+    .scrapbook-split {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 12px 12px 26px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+      transform: rotate(-3deg);
+      position: relative;
+      width: 210px;
+    }
+
+    .polaroid::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 70px;
+      height: 22px;
+      background: rgba(96, 165, 250, 0.65);
+      border-radius: 2px;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 195px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .polaroid-caption {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.35rem;
+      margin-top: 8px;
+      color: var(--text-main);
+    }
+
+    .compliment-box {
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .speech-bubble {
+      background: #fff;
+      border: 3px solid #93c5fd;
+      border-radius: 22px;
+      padding: 18px 20px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.4rem;
+      line-height: 1.35;
+      color: var(--text-main);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.1);
+      min-height: 105px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Heart Memory Collage */
+    .heart-collage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .mini-heart-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .heart-photo {
+      width: 115px;
+      height: 105px;
+      object-fit: cover;
+      clip-path: path("M57.5,96 C57.5,96 8,66 8,33 C8,15 22,4 37,4 C47,4 54,10 57.5,16 C61,10 68,4 78,4 C93,4 107,15 107,33 C107,66 57.5,96 57.5,96 Z");
+      transition: transform 0.25s ease;
+    }
+
+    .heart-photo:hover {
+      transform: scale(1.08);
+    }
+
+    .center-memory {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+      object-fit: cover;
+    }
+
+    .date-tag {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.4rem;
+      color: var(--blue-main);
+      background: #fff;
+      padding: 4px 18px;
+      border-radius: 999px;
+      border: 2px dashed #60a5fa;
+      margin-top: 6px;
+    }
+
+    /* Birthday Wish Page: Interactive Blue Cake + Handwritten Letter */
+    .letter-card {
+      background: rgba(255, 255, 255, 0.96);
+      color: #172554;
+      border: 3px solid #93c5fd;
+      border-radius: 20px;
+      padding: 20px 24px;
+      max-width: 540px;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      text-align: left;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      margin-top: 12px;
+    }
+
+    .cake-interactive {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .candles {
+      display: flex;
+      gap: 14px;
+      margin-bottom: -10px;
+      z-index: 2;
+    }
+
+    .candle {
+      width: 10px;
+      height: 28px;
+      background: repeating-linear-gradient(45deg, #38bdf8, #38bdf8 5px, #fff 5px, #fff 10px);
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .flame {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 16px;
+      background: radial-gradient(circle at 50% 70%, #fef08a, #f59e0b);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flicker 0.35s infinite alternate;
+      box-shadow: 0 0 10px #fde047;
+    }
+
+    .flame.out {
+      display: none;
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1) rotate(-3deg); }
+      to   { transform: translateX(-50%) scale(1.12) rotate(3deg); }
+    }
+
+    .cake-body {
+      width: 130px;
+      height: 55px;
+      background: #60a5fa;
+      border-radius: 12px 12px 8px 8px;
+      border-top: 14px solid #e0f2fe;
+      box-shadow: 0 6px 0 #2563eb;
+      position: relative;
+    }
+
+    /* Finale Animated Big Love Text */
+    .love-banner {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 700;
+      color: var(--blue-main);
+      letter-spacing: 3px;
+      margin: 10px 0;
+      animation: heartbeat 1.3s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.07); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.05); }
+    }
+
+    .divider-gif {
+      width: 180px;
+      margin: 6px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- PERSONALIZE: Drop your favorite .mp3 file in the same folder and update src="song.mp3" -->
+  <audio id="bg-music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="stage" id="stage">
+    <button class="music-pill" id="music-toggle" onclick="toggleMusic()">🎵 Music: Off</button>
+
+    <!-- ==========================================
+         SECTION 1: KNOCK ON THE DOOR (GATEKEEPER)
+         ========================================== -->
+    <section class="page active" id="sec-door">
+      <span class="sticker tl">🏎️</span>
+      <span class="sticker tr">✨</span>
+      <span class="sticker bl">💙</span>
+      <span class="sticker br">🏁</span>
+
+      <h1 id="door-title">KNOCK KNOCK! 🚘</h1>
+      <div class="gif-box">
+        <img src="https://media1.tenor.com/m/Eazcnx5O-bgAAAAC/dudu-dudu-cute.gif" alt="Cute delivery mascot" />
+      </div>
+      <p class="subtitle" id="door-subtitle">
+        Special VIP birthday delivery for the <strong>cutest person alive</strong>! Will you open the door?
+      </p>
+
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="acceptDoor()">OPEN DOOR 🔑</button>
+        <button class="btn btn-no" onclick="handleIgnore()">IGNORE 🙈</button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ESCALATING IGNORE SCENES (1st, 2nd, 3rd+)
+         ========================================== -->
+    <!-- Ignore #1 -->
+    <section class="page" id="sec-sad1">
+      <span class="sticker tl">🌧️</span>
+      <span class="sticker tr">💙</span>
+
+      <h1>WHY DID YOU IGNORE ME?!</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/jv7A2Hj-tBgAAAAM/sad-bubu.gif" alt="Sad crying Bubu" />
+      </div>
+      <p class="subtitle">
+        I drove all the way here in my dream ride in the rain!! Don't leave me outside 🥺
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="backToDoor()">TRY AGAIN 🥺</button>
+      </div>
+    </section>
+
+    <!-- Ignore #2 -->
+    <section class="page" id="sec-sad2">
+      <span class="sticker tl">🥶</span>
+      <span class="sticker br">😭</span>
+
+      <h1>SERIOUSLY, AGAIN?! 😭</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/04EF4zhR6LsAAAAi/dudu-dudu-cry.gif" alt="Crying mascot" />
+      </div>
+      <p class="subtitle">
+        My tiny paws are freezing out here and the birthday cake is getting cold!! Pls have mercy!! 🍰💔
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="backToDoor()">OKAY GO BACK 😢</button>
+      </div>
+    </section>
+
+    <!-- Ignore #3+ (Dramatic Tantrum) -->
+    <section class="page" id="sec-sad3">
+      <span class="sticker tl">🚨</span>
+      <span class="sticker tr">😤</span>
+
+      <h1>EXCUSE ME?! 😤</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/xhUHbQIneM4AAAAj/angry-bubu-as-dudu.gif" alt="Angry Bubu tantrum" />
+      </div>
+      <p class="subtitle">
+        That's it! I'm taking away your Ignore button!! You CANNOT escape your birthday surprise! 💥
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-blue" onclick="acceptDoor()">FINE, OPEN THE DOOR! 🔑</button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2A: PLAYFUL TRAP Q1 (LIE DETECTOR)
+         ========================================== -->
+    <section class="page" id="sec-q1">
+      <span class="sticker tl">🔍</span>
+      <span class="sticker tr">💎</span>
+
+      <h1>Honesty Test! 🕵️‍♀️</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/-aW73OVUtyYAAAAi/tkthao219-bubududu.gif" alt="Cute hearts mascot" />
+      </div>
+      <p class="subtitle">
+        Question 1: Who is the cutest human in the entire universe?
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-yes" onclick="goTo('sec-q1-correct')">Me, obviously 💅</button>
+        <button class="btn btn-no" onclick="goTo('sec-q1-trap')">Not me, someone else 🙈</button>
+      </div>
+    </section>
+
+    <!-- Q1 Correct Answer Celebration Section -->
+    <section class="page" id="sec-q1-correct">
+      <span class="sticker tl">🏁</span>
+      <span class="sticker tr">💙</span>
+
+      <h1>DING DING DING! 🎉</h1>
+      <div class="gif-box">
+        <img src="https://media1.tenor.com/m/fulXUUfJ_dcAAAAd/ohdisha.gif" alt="Happy cheering mascot" />
+      </div>
+      <p class="subtitle">
+        YESSS! Look at that confidence—10/10 honesty, 100/10 cuteness! I knew you'd pass! 🏎️✨
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-blue" onclick="goTo('sec-q2')">Next Question →</button>
+      </div>
+    </section>
+
+    <!-- Q1 Trap Section -->
+    <section class="page" id="sec-q1-trap">
+      <span class="sticker tl">🚨</span>
+      <span class="sticker tr">🚨</span>
+
+      <h1>LIE DETECTED! 🚨</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/SJdwELLr0HEAAAAM/quby-quby-sticker.gif" alt="Suspicious cheeky Quby" />
+      </div>
+      <p class="subtitle">
+        Nice try being humble, bestie! Everyone knows it's <strong>YOU</strong>. No lying allowed on your birthday! 😤
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-blue" onclick="goTo('sec-q2')">Okay fine, IT'S ME! 💙</button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2B: PLAYFUL TRAP Q2 (SHRINKING BTN)
+         ========================================== -->
+    <section class="page" id="sec-q2">
+      <span class="sticker tl">🚘</span>
+      <span class="sticker br">💙</span>
+
+      <h1>Quick Confession! 🥰</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/h00vfjqfwF0AAAAi/cute-lovely.gif" alt="Cute smiling mascot" />
+      </div>
+      <p class="subtitle" id="q2-subtitle">
+        Question 2: Admit it... am I your favorite person in the whole world?
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-yes" id="q2-yes-btn" onclick="goTo('sec-q3')">YES, 1000%! 💙</button>
+        <button class="btn btn-no" id="q2-trap-btn" onclick="shrinkTrap()">Hmm, let me think... 🤔</button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2C: PLAYFUL TRAP Q3 (RUNAWAY BTN)
+         ========================================== -->
+    <section class="page" id="sec-q3">
+      <span class="sticker tl">👑</span>
+      <span class="sticker bl">🏎️</span>
+
+      <h1>Final Question! 👑</h1>
+      <div class="gif-box">
+        <img src="https://media.tenor.com/ZE-j5SASZ_8AAAAi/summer-ann-peach-goma.gif" alt="Pleading mascot" />
+      </div>
+      <p class="subtitle">
+        Will you let me annoy you with endless love entire life?
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-blue" onclick="finishQuiz()">YES, SPOIL ME! 👑</button>
+        <button class="btn btn-no" id="runaway-btn"
+                onmouseenter="dodgeButton()"
+                ontouchstart="dodgeButton(event)"
+                onclick="dodgeButton(event)">
+          No, save your effort 🙅
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: LUXURY GARAGE HUB (Kept in code)
+         ========================================== -->
+    <section class="page" id="sec-hub">
+      <span class="sticker tl">🏎️</span>
+      <span class="sticker tr">🏁</span>
+
+      <h1>Luxury Birthday Garage! 🏎️</h1>
+      <p class="subtitle" id="hub-status">
+        Each ride holds a little surprise. Check all 3 to unlock the final vault! (0/3)
+      </p>
+
+      <div class="garage-grid">
+        <div class="car-card" id="card-f1" onclick="openGarageItem('f1', 'sec-flower1')">
+          <span class="car-icon">🏎️</span>
+          <h3>VIP Profile</h3>
+          <span class="badge">✓ Checked</span>
+        </div>
+
+        <div class="car-card" id="card-f2" onclick="openGarageItem('f2', 'sec-flower2')">
+          <span class="car-icon">🚘</span>
+          <h3>Our Highlights</h3>
+          <span class="badge">✓ Checked</span>
+        </div>
+
+        <div class="car-card" id="card-f3" onclick="openGarageItem('f3', 'sec-flower3')">
+          <span class="car-icon">🏁</span>
+          <h3>Birthday Wish</h3>
+          <span class="badge">✓ Checked</span>
+        </div>
+      </div>
+
+      <button class="btn btn-locked" id="btn-finale" onclick="openFinale()" disabled>
+        🔒 Final Surprise (Check all 3 first!)
+      </button>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4A: VIP PROFILE (Kept in code)
+         ========================================== -->
+    <section class="page" id="sec-flower1">
+      <span class="sticker tl">📸</span>
+      <span class="sticker tr">💎</span>
+
+      <h1>My Favorite Human 💙</h1>
+      <div class="scrapbook-split">
+        <div class="polaroid">
+          <!-- PERSONALIZE: Replace src with their smiling photo -->
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80" alt="Birthday Star" />
+          <div class="polaroid-caption">VIP Star ✨</div>
+        </div>
+
+        <div class="compliment-box">
+          <div class="speech-bubble" id="compliment-text">
+            "You make every boring day feel like an adventure just by being there."
+          </div>
+          <button class="btn btn-blue" onclick="nextCompliment()">
+            Tap for another reason ✨
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn-back" onclick="goTo('sec-hub')">← Back to Garage</button>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4B: OUR HIGHLIGHTS (Kept in code)
+         ========================================== -->
+    <section class="page" id="sec-flower2">
+      <span class="sticker tl">📷</span>
+      <span class="sticker br">🏎️</span>
+
+      <h1>Our Best Moments 💙</h1>
+      <img class="divider-gif" src="https://media.tenor.com/Xnybf3jhseIAAAAi/divider.gif" alt="Cute divider" />
+
+      <div class="heart-collage">
+        <div class="mini-heart-wrap">
+          <img class="heart-photo" src="https://images.unsplash.com/photo-1515232389446-a17ce9ca7434?auto=format&fit=crop&w=400&q=80" alt="Memory 1" />
+          <img class="heart-photo" src="https://images.unsplash.com/photo-1494403687614-8ca3e13f154f?auto=format&fit=crop&w=400&q=80" alt="Memory 2" />
+        </div>
+
+        <img class="center-memory" src="https://images.unsplash.com/photo-1461008956507-41cd3cee8b31?auto=format&fit=crop&w=500&q=80" alt="Main Couple Memory" />
+
+        <div class="mini-heart-wrap">
+          <img class="heart-photo" src="https://images.unsplash.com/photo-1473271008451-b0fcb08b728d?auto=format&fit=crop&w=400&q=80" alt="Memory 3" />
+          <img class="heart-photo" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80" alt="Memory 4" />
+        </div>
+      </div>
+
+      <div class="date-tag">✨ Forever Grateful For You ✨</div>
+
+      <button class="btn btn-back" onclick="goTo('sec-hub')">← Back to Garage</button>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4C: BIRTHDAY WISH LETTER & CAKE
+         (Loads directly after Question 3!)
+         ========================================== -->
+    <section class="page" id="sec-flower3">
+      <span class="sticker tl">🏎️</span>
+      <span class="sticker tr">💎</span>
+
+      <h1>Make a Wish! 🎂💙</h1>
+
+      <div class="cake-interactive" id="cake-stage">
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+        <div class="cake-body"></div>
+        <button class="btn btn-yes" id="blow-btn" onclick="blowCandles()" style="margin-top:10px;">
+          💨 Blow Out Candles!
+        </button>
+      </div>
+
+      <div class="gif-box" id="bday-gif" style="display:none; height: 130px; margin-bottom: 6px;">
+        <img src="https://media.tenor.com/saJkA-UIuoYAAAAi/peach-goma.gif" alt="Happy Birthday" />
+      </div>
+
+      <!-- PERSONALIZE: Write your personal birthday letter here -->
+      <div class="letter-card">
+        Happy Birthday, my favorite person! 🎉<br>
+        On your special day, I just want to remind you how deeply loved and appreciated you are.
+        Thank you for every laugh, every late-night talk, and every memory we share.
+        May this new year bring you endless happiness, luxury rides, peace, and everything your heart wishes for! 💙🏎️
+      </div>
+
+      <button class="btn btn-blue" style="margin-top: 18px;" onclick="goTo('sec-finale'); launchConfetti();">
+        Final Surprise 🏁💙 →
+      </button>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: THE FINALE (VIRTUAL HUG)
+         ========================================== -->
+    <section class="page" id="sec-finale">
+      <span class="sticker tl">🏎️</span>
+      <span class="sticker tr">🐻</span>
+      <span class="sticker bl">🏁</span>
+      <span class="sticker br">💙</span>
+
+      <h1>Virtual Hug For You!</h1>
+      <div class="gif-box" style="width: 210px; height: 185px;">
+        <img src="https://media.tenor.com/DnRCCLApc6kAAAAC/milk-and-mocha-bear-hug.gif" alt="Milk and Mocha Bear Hug" />
+      </div>
+
+      <div class="love-banner">Love You Meri Jaan 💙</div>
+      <p class="subtitle">Happy Birthday once again!! Hope this made you smile! ✨</p>
+
+      <button class="btn btn-blue" onclick="resetQuest()">Replay Surprise 🔄</button>
+    </section>
+  </main>
+
+  <script>
+    const stage = document.getElementById('stage');
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-toggle');
+    let musicPlaying = false;
+
+    // 1. Page Switching (Hide/Unhide Sections) + Theme Styling
+    function goTo(sectionId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+
+      stage.classList.remove('gingham-bg', 'night-bg');
+      if (sectionId === 'sec-flower1' || sectionId === 'sec-flower2') {
+        stage.classList.add('gingham-bg');
+      } else if (sectionId === 'sec-flower3') {
+        stage.classList.add('night-bg');
+      }
+    }
+
+    // 2. Escalating Ignore Logic
+    let ignoreCount = 0;
+
+    function handleIgnore() {
+      ignoreCount++;
+      if (ignoreCount === 1) {
+        goTo('sec-sad1');
+      } else if (ignoreCount === 2) {
+        goTo('sec-sad2');
+      } else {
+        goTo('sec-sad3');
+      }
+    }
+
+    function backToDoor() {
+      if (ignoreCount === 1) {
+        document.getElementById('door-title').textContent = 'KNOCKING AGAIN! 🚘';
+        document.getElementById('door-subtitle').innerHTML =
+          'Please open the door this time? My arms are getting tired 🥺';
+      } else if (ignoreCount >= 2) {
+        document.getElementById('door-title').textContent = 'LAST CHANCE! 🥺🚘';
+        document.getElementById('door-subtitle').innerHTML =
+          'Seriously don’t click Ignore a 3rd time or I will lose it!! 😭';
+      }
+      goTo('sec-door');
+    }
+
+    // 3. Door Acceptance + Try Auto-Starting Music
+    function acceptDoor() {
+      music.play().then(() => {
+        musicPlaying = true;
+        musicBtn.textContent = '🎵 Music: On';
+      }).catch(() => {});
+      goTo('sec-q1');
+    }
+
+    function toggleMusic() {
+      if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+        musicBtn.textContent = '🎵 Music: Off';
+      } else {
+        music.play().then(() => {
+          musicPlaying = true;
+          musicBtn.textContent = '🎵 Music: On';
+        }).catch(() => {
+          alert('Tip: Place a "song.mp3" file in the same folder as index.html to play custom music!');
+        });
+      }
+    }
+
+    // 4. Q2 Shrinking Trap Logic
+    let q2Clicks = 0;
+    const q2Messages = [
+      'Wrong button bestie... think faster! ⏱️',
+      'Are you SURE you need to think about this?! 👀',
+      'Okay I shrunk that button for your own good 😂'
+    ];
+    const q2BtnLabels = ['Still thinking...', 'Wait maybe...', 'Bye! 👋'];
+
+    function shrinkTrap() {
+      const yesBtn = document.getElementById('q2-yes-btn');
+      const trapBtn = document.getElementById('q2-trap-btn');
+      const sub = document.getElementById('q2-subtitle');
+
+      if (q2Clicks < 3) {
+        sub.textContent = q2Messages[q2Clicks];
+        trapBtn.textContent = q2BtnLabels[q2Clicks];
+        q2Clicks++;
+
+        const shrinkScale = Math.max(0.45, 1 - q2Clicks * 0.2);
+        const growScale = 1 + q2Clicks * 0.18;
+        trapBtn.style.transform = `scale(${shrinkScale})`;
+        yesBtn.style.transform = `scale(${growScale})`;
+
+        if (q2Clicks === 3) {
+          setTimeout(() => { trapBtn.style.display = 'none'; }, 350);
+        }
+      }
+    }
+
+    // 5. Q3 Runaway Button Trap Logic -> Jumps straight to Birthday Wish Letter Page!
+    let dodgeCount = 0;
+    const dodgeLabels = ['Nope! 😜', 'Too slow! 💨', 'Nice try! 😂', "Can't click me!", 'Press YES!! 💙'];
+
+    function dodgeButton(e) {
+      if (e) e.preventDefault();
+      const btn = document.getElementById('runaway-btn');
+      const btnWidth = btn.offsetWidth || 170;
+      const btnHeight = btn.offsetHeight || 48;
+
+      const pad = 20;
+      const maxX = Math.max(pad + 10, stage.clientWidth - btnWidth - pad);
+      const maxY = Math.max(70, stage.clientHeight - btnHeight - pad);
+
+      const randX = Math.floor(Math.random() * (maxX - pad)) + pad;
+      const randY = Math.floor(Math.random() * (maxY - 64)) + 64;
+
+      btn.style.position = 'absolute';
+      btn.style.left = randX + 'px';
+      btn.style.top = randY + 'px';
+      btn.style.zIndex = '15';
+      btn.textContent = dodgeLabels[dodgeCount % dodgeLabels.length];
+      dodgeCount++;
+    }
+
+    function finishQuiz() {
+      launchConfetti();
+      goTo('sec-flower3');
+    }
+
+    // 6. Luxury Garage Tracking (Kept for completeness)
+    const openedItems = new Set();
+
+    function openGarageItem(itemKey, targetSection) {
+      openedItems.add(itemKey);
+      document.getElementById('card-' + itemKey).classList.add('visited');
+
+      const count = openedItems.size;
+      document.getElementById('hub-status').textContent =
+        count < 3
+          ? `Each ride holds a little surprise. Check all 3 to unlock the final vault! (${count}/3)`
+          : `Yay! All 3 rides checked! Your final surprise is unlocked! 🎉`;
+
+      if (count === 3) {
+        const finaleBtn = document.getElementById('btn-finale');
+        finaleBtn.disabled = false;
+        finaleBtn.classList.remove('btn-locked');
+        finaleBtn.classList.add('btn-yes');
+        finaleBtn.textContent = '🏎️ Open Final Surprise!';
+      }
+
+      goTo(targetSection);
+    }
+
+    function openFinale() {
+      if (openedItems.size < 3) return;
+      goTo('sec-finale');
+      launchConfetti();
+    }
+
+    // 7. Compliment Generator
+    const compliments = [
+      '"You make every boring day feel like an adventure just by being there."',
+      '"Your laugh is genuinely my favorite sound in the whole world."',
+      '"You have the kindest heart and you make everyone around you feel safe."',
+      '"No matter how busy life gets, talking to you always fixes my mood."',
+      '"You deserve all the love, luxury rides, and happiness in the universe today!"'
+    ];
+    let compIdx = 0;
+
+    function nextCompliment() {
+      compIdx = (compIdx + 1) % compliments.length;
+      document.getElementById('compliment-text').textContent = compliments[compIdx];
+    }
+
+    // 8. Interactive Candles (Birthday Wish Page)
+    function blowCandles() {
+      document.querySelectorAll('.flame').forEach(f => f.classList.add('out'));
+      document.getElementById('blow-btn').style.display = 'none';
+      launchConfetti();
+      setTimeout(() => {
+        document.getElementById('cake-stage').style.display = 'none';
+        document.getElementById('bday-gif').style.display = 'flex';
+      }, 650);
+    }
+
+    // 9. Reset Everything for Replay
+    function resetQuest() {
+      ignoreCount = 0;
+      document.getElementById('door-title').textContent = 'KNOCK KNOCK! 🚘';
+      document.getElementById('door-subtitle').innerHTML =
+        'Special VIP birthday delivery for the <strong>cutest person alive</strong>! Will you open the door?';
+
+      q2Clicks = 0;
+      document.getElementById('q2-subtitle').textContent =
+        'Question 2: Admit it... am I your favorite person in the whole world?';
+      const q2Yes = document.getElementById('q2-yes-btn');
+      const q2Trap = document.getElementById('q2-trap-btn');
+      q2Yes.style.transform = '';
+      q2Trap.style.transform = '';
+      q2Trap.style.display = 'inline-block';
+      q2Trap.textContent = 'Hmm, let me think... 🤔';
+
+      dodgeCount = 0;
+      const runBtn = document.getElementById('runaway-btn');
+      runBtn.style.position = 'static';
+      runBtn.style.left = '';
+      runBtn.style.top = '';
+      runBtn.textContent = 'No, save your effort 🙅';
+
+      openedItems.clear();
+      document.querySelectorAll('.car-card').forEach(c => c.classList.remove('visited'));
+      document.getElementById('hub-status').textContent =
+        'Each ride holds a little surprise. Check all 3 to unlock the final vault! (0/3)';
+      const finaleBtn = document.getElementById('btn-finale');
+      finaleBtn.disabled = true;
+      finaleBtn.className = 'btn btn-locked';
+      finaleBtn.textContent = '🔒 Final Surprise (Check all 3 first!)';
+
+      document.querySelectorAll('.flame').forEach(f => f.classList.remove('out'));
+      document.getElementById('cake-stage').style.display = 'flex';
+      document.getElementById('blow-btn').style.display = 'inline-block';
+      document.getElementById('bday-gif').style.display = 'none';
+
+      goTo('sec-door');
+    }
+
+    // 10. Lightweight Pure-JS Luxury Blue & Silver/Gold Confetti
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function launchConfetti() {
+      const colors = ['#2563eb', '#38bdf8', '#93c5fd', '#facc15', '#ffffff', '#0ea5e9'];
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.8) * 14,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 100
+        });
+      }
+      if (particles.length <= 90) animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.life > 0);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.life--;
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(p.life / 100, 0);
+        ctx.fillRect(p.x, p.y, p.size, p.size * 0.6);
+      }
+      ctx.globalAlpha = 1;
+      if (particles.length > 0) requestAnimationFrame(animateConfetti);
+    }
+  </script>
+</body>
+</html>
